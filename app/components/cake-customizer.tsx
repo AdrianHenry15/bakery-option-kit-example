@@ -1,96 +1,75 @@
-import React from "react"
+"use client"
+
+import { useState } from "react"
+
 import {
-  CakeShapeSizes,
   CAKE_FLAVORS,
   CAKE_FROSTINGS,
   CAKE_TOPPINGS,
   CAKE_FILLINGS,
 } from "baking-options-kit"
+import Select from "./select"
+import { handleSelect } from "../lib/select-handler"
 
-function CakeCustomizer() {
+// Cupcake Customizer component
+const CakeCustomizer = () => {
+  const [flavor, setFlavor] = useState<string | null>(null)
+  const [frosting, setFrosting] = useState<string | null>(null)
+  const [topping, setTopping] = useState<string | null>(null)
+  const [filling, setFilling] = useState<string | null>(null)
+
+  const setters = { setFlavor, setFrosting, setTopping, setFilling }
+
   return (
-    <div className="min-h-screen bg-gradient-to-r from-indigo-100 to-indigo-300 flex flex-col justify-start items-center p-8 space-y-12">
-      <h1 className="text-4xl font-extrabold text-gray-800 mb-8">
-        Bakery Options Cake Kit
-      </h1>
+    <div className="max-w-4xl mx-auto p-6 text-black bg-white rounded-lg shadow-lg">
+      <h2 className="text-3xl font-semibold text-center mb-6">
+        Customize Your Cake
+      </h2>
 
-      <section className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-2xl">
-        <h2 className="text-2xl font-semibold text-gray-700 mb-6">
-          Choose Your Cake Shape and Size
-        </h2>
-        <ul className="space-y-6">
-          {CakeShapeSizes.map((item, index) => (
-            <li
-              key={index}
-              className="flex justify-between items-center border-b-2 py-4">
-              <span className="text-lg font-medium text-gray-800">{`${item.shape} - ${item.size}`}</span>
-              <span className="text-sm text-gray-500">
-                Servings: {item.servings}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <div className="space-y-6">
+        <Select
+          label="Flavor"
+          options={CAKE_FLAVORS}
+          value={flavor}
+          onChange={(value) => handleSelect("flavor", value, setters)}
+        />
+        <Select
+          label="Frosting"
+          options={CAKE_FROSTINGS}
+          value={frosting}
+          onChange={(value) => handleSelect("frosting", value, setters)}
+        />
+        <Select
+          label="Topping"
+          options={CAKE_TOPPINGS}
+          value={topping}
+          onChange={(value) => handleSelect("topping", value, setters)}
+        />
+        <Select
+          label="Filling"
+          options={CAKE_FILLINGS}
+          value={filling}
+          onChange={(value) => handleSelect("filling", value, setters)}
+        />
+      </div>
 
-      <section className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-2xl">
-        <h2 className="text-2xl font-semibold text-gray-700 mb-6">
-          Select Your Cake Flavor
-        </h2>
-        <ul className="grid grid-cols-2 gap-6">
-          {CAKE_FLAVORS.map((flavor, index) => (
-            <li
-              key={index}
-              className="border-2 py-4 px-6 rounded-xl text-center cursor-pointer transition transform hover:scale-105 hover:bg-indigo-100 hover:text-indigo-600">
-              {flavor}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-2xl">
-        <h2 className="text-2xl font-semibold text-gray-700 mb-6">
-          Choose Your Frosting
-        </h2>
-        <ul className="grid grid-cols-2 gap-6">
-          {CAKE_FROSTINGS.map((frosting, index) => (
-            <li
-              key={index}
-              className="border-2 py-4 px-6 rounded-xl text-center cursor-pointer transition transform hover:scale-105 hover:bg-indigo-100 hover:text-indigo-600">
-              {frosting}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-2xl">
-        <h2 className="text-2xl font-semibold text-gray-700 mb-6">
-          Pick Your Toppings
-        </h2>
-        <ul className="grid grid-cols-2 gap-6">
-          {CAKE_TOPPINGS.map((topping, index) => (
-            <li
-              key={index}
-              className="border-2 py-4 px-6 rounded-xl text-center cursor-pointer transition transform hover:scale-105 hover:bg-indigo-100 hover:text-indigo-600">
-              {topping}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-2xl">
-        <h2 className="text-2xl font-semibold text-gray-700 mb-6">
-          Choose Your Filling
-        </h2>
-        <ul className="grid grid-cols-2 gap-6">
-          {CAKE_FILLINGS.map((filling, index) => (
-            <li
-              key={index}
-              className="border-2 py-4 px-6 rounded-xl text-center cursor-pointer transition transform hover:scale-105 hover:bg-indigo-100 hover:text-indigo-600">
-              {filling}
-            </li>
-          ))}
-        </ul>
-      </section>
+      <div className="mt-8">
+        <h3 className="text-2xl font-semibold mb-4">Your Custom Cake:</h3>
+        <div className="space-y-2">
+          <p>
+            <strong>Flavor:</strong> {flavor || "None selected"}
+          </p>
+          <p>
+            <strong>Frosting:</strong> {frosting || "None selected"}
+          </p>
+          <p>
+            <strong>Topping:</strong> {topping || "None selected"}
+          </p>
+          <p>
+            <strong>Filling:</strong> {filling || "None selected"}
+          </p>
+        </div>
+      </div>
     </div>
   )
 }
