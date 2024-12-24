@@ -1,8 +1,10 @@
 import React from "react"
 
 interface IHeaderProps {
-  selectedCustomizer: "cake" | "cupcake" | "cookie"
-  setSelectedCustomizer: (customizer: "cake" | "cupcake" | "cookie") => void
+  selectedCustomizer: "cake" | "cupcake" | "cookie" | "documentation"
+  setSelectedCustomizer: (
+    customizer: "cake" | "cupcake" | "cookie" | "documentation"
+  ) => void
 }
 
 const Header: React.FC<IHeaderProps> = ({
@@ -39,6 +41,15 @@ const Header: React.FC<IHeaderProps> = ({
               : "bg-white text-gray-700"
           } transition-colors duration-300`}>
           Cookie
+        </button>
+        <button
+          onClick={() => setSelectedCustomizer("documentation")}
+          className={`px-6 py-2 text-lg font-medium rounded-xl mx-4 ${
+            selectedCustomizer === "documentation"
+              ? "bg-indigo-600 text-white"
+              : "bg-white text-gray-700"
+          } transition-colors duration-300`}>
+          Documentation
         </button>
       </nav>
     </header>
