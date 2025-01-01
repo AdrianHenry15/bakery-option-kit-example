@@ -6,6 +6,7 @@ import CakeCustomizer from "./components/cake-customizer"
 import CupcakeCustomizer from "./components/cupcake-customizer"
 import CookieCustomizer from "./components/cookie-customizer"
 import DocumentationPage from "./components/documentation-page"
+import CoffeeWidget from "./components/coffee-widget"
 
 function Home() {
   const [selectedCustomizer, setSelectedCustomizer] = useState<
@@ -26,6 +27,7 @@ function Home() {
         {selectedCustomizer === "cupcake" && <CupcakeCustomizer />}
         {selectedCustomizer === "cookie" && <CookieCustomizer />}
         {selectedCustomizer === "documentation" && <DocumentationPage />}
+        <CoffeeWidget />
       </div>
     </>
   )
